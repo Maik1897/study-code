@@ -7,7 +7,7 @@ This first Lab has the goal to get you started and help you to get more confiden
 ## Section I: Your first steps in GitHub
 
 1. Create a [Github](github.com) account.
-2. Register for the [Github Student Pack](https://education.github.com/pack) to increase your free Codespace limits.
+2. (Optional) Register for the [Github Student Pack](https://education.github.com/pack) to increase your free Codespace limits.
 3. Navigate to the GitHub repository [study-code](https://github.com/christian-braunagel/study-code).
 4. Fork the GitHub repository.
 5. Use GitHub Codespaces to open the repository remotely.
