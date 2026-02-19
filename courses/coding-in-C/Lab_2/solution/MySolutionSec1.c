@@ -1,4 +1,4 @@
-/* Lab2
+/* Lab2 Section 1
  * File: MySolutionSec1.c
  * Description: Simple calculator program
  */
@@ -14,20 +14,15 @@
         {
             char letter = 'A' + column; // Buchstaben beginnen bei A und werden bis H hochgezählt
             int row = i; // Zahlen von 8 bis 1 in jeder Spalte
-
-
+            
             printf("%c%d ", letter, row);
             
-
-
         }
 
-        printf("\n");
+        printf("\n\n");
 
-
-       
     }
-
+  
      return 0;
  }
 
