@@ -19,7 +19,7 @@
             
         }
 
-        printf("\n\n");
+        printf("\n\n"); // Doppelter Zeilenumbruch nachdem beide Schleifen einen Durchgang durchgeführt haben
 
     }
   
