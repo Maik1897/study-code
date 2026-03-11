@@ -18,9 +18,9 @@ int main()
     if (fgets(buffer, sizeof(buffer), stdin) != NULL); //Überprüfung ob Eingabe korrekt ist
     {
         iNumb = (int) strtol(buffer, NULL, 10); // Zahl aus dem String lesen und in integer umwandeln
-        printf("Entered number: %d\n", iNumb);
+        //printf("Entered number: %d\n", iNumb);
     }
-// malloc funktion
+// 1. malloc funktion --> zuerst speicher reservieren, dann programm schreiben
     int *p_iNumb = malloc(sizeof *p_iNumb); // Speicher für int reservieren
     if(p_iNumb == NULL) // Fehlerüberprüfung
     {
@@ -31,9 +31,9 @@ int main()
     *p_iNumb = iNumb;
     printf("\n%d", *p_iNumb);
 
-    iNumb = iNumb * 2; 
+    iNumb = iNumb * 2; // realloc verwenden
     // calloc deklaration und initialisierung
-    int *p_Arr = calloc(iNumb, sizeof(*p_iNumb));
+    int *p_Arr = calloc(iNumb, sizeof *p_iNumb);
 
     for (int i = 0; i <= iNumb; i++)
     {
