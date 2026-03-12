@@ -3,7 +3,8 @@
     Description:
 */
 
-#define fixed_size 3000
+#define fixed_size 3000 // 60 sekunden gemessen, 0,02 Samples = 3000 Messwerte
+#define step_size 0,02 
 
 #include <stdio.h>
 #include <string.h>
@@ -18,57 +19,83 @@ typedef struct
 
 typedef struct 
 {
-    int SensorID;
-    double detect_treshold;
-    int arr_Data[fixed_size];
-    int arr_intObject_detect[fixed_size];
+    int id;
+    double treshold;
+    SensorData Data[fixed_size];
+    int object_detection[fixed_size];
 } Sensor;
+
+int read_sensor_data(Sensor *p_sensor, const char *p_filename)
+{
+    FILE *p_file = fopen("sensor1.txt", "r");
+    if(p_file == NULL)
+    {
+        printf("File: %s could not be opened.\n", p_filename);
+        return -1;
+    }
+
+    int i = 0;
+    while(i < fixed_size)
+    {
+       if(fscanf(p_file, "%f" "%lf", &p_sensor->Data[i].time, &p_sensor->Data[i].probability) != 2);
+       {
+        printf("Incorrect file format detected. Program stopped.\n");
+        fclose(p_file);
+        return -1;
+       }
+       i++;
+    }
+    fclose(p_file);
+    return 0;
+}
+
+void get_object_detection(Sensor *p_sensor, SensorData *p_sensordata)
+{
+    for(int i = 0; i < fixed_size; i++)
+    {
+        if(p_sensor->treshold < p_sensordata->probability)
+        {
+            p_sensor->object_detection[i] = 1;
+        }
+        else
+        {
+            p_sensor->object_detection[i] = 0;
+        }
+    }
+    
+}
+
+void fusing_sensors(int sensor1_detect[], int sensor2_detect[], int fusion[])
+{
+    for(int i = 0; i < fixed_size; i++)
+    {
+        fusion[i] = sensor1_detect[i] && sensor2_detect[i];
+    }
+}
+
+void print_interval(float start[], float end[], const char *label)
+{
+    int i = 0;
+    while (start[i] >= 0)
+    {
+        printf("Start: %2f End: %2f", start[i], end[i]);
+        i++;
+    }
+    printf("\n");
+}
+
+
+
 
 
 int main()
 {
-    SensorData *p_SensorData;
-    Sensor *p_Sensor;
-
-    // 1. Open the sensor data files and check wether the files can be opened
-
-    FILE *p_data1 = fopen("sensor1.txt", "r+");
-    if(p_data1 == NULL)
-    {
-        printf("Could not open Sensor1.\n");
-        return -1;
-    }
-
-    FILE *p_data2 = fopen("sensor2.txt", "r+");
-    if(p_data2 == NULL)
-    {
-        printf("Could not open Sensor2.\n");
-        return -1;
-    }
-
-    // fscanf --> Formatbasiertes lesen!! read the two measurement files into sensor structs
-    fscanf(p_data1, "d", p_Sensor->arr_Data);
-   // fscanf(p_data2, "d");
-
-    printf("%d\n", p_Sensor->arr_Data);
-
-    p_data1 = p_Sensor->arr_Data;
-
-
-    // 2. generare a binary detection signal based on its treshold
-    if(p_Sensor->detect_treshold < p_SensorData->probability)
-    {
-        printf("1");
-    }
-    else
-    {
-        printf("0");
-    }
+    
 
 
 
 
-
+    return 0;
 }
 
 
